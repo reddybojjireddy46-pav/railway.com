@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings — RailYatra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-brand">
+        <span class="logo-icon">🚄</span>
+        <span class="logo-text">RailYatra</span>
+    </div>
+    <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="mybookings.html" class="nav-link active">My Bookings</a>
+    </div>
+</nav>
+
+<div class="page-container">
+    <div class="page-header">
+        <h1>My Bookings</h1>
+        <p>Enter your PNR number to view ticket details</p>
+    </div>
+
+    <div class="pnr-search-card">
+        <div class="pnr-icon">🎫</div>
+        <h2>PNR Status Check</h2>
+        <form action="ticket" method="post" class="pnr-form">
+            <div class="pnr-input-row">
+                <input type="text"
+                       name="pnr"
+                       placeholder="Enter PNR Number (e.g. PNR1234567890)"
+                       class="pnr-input"
+                       required
+                       maxlength="20">
+                <button type="submit" class="pnr-btn">Check Status</button>
+            </div>
+        </form>
+        <p class="pnr-hint">Your PNR number was provided at the time of booking</p>
+    </div>
+
+    <div class="how-it-works">
+        <h3>How it works</h3>
+        <div class="steps-grid">
+            <div class="step">
+                <div class="step-num">1</div>
+                <p>Enter your 13-digit PNR number</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <p>View your full ticket details</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <p>Cancel if needed — WL auto-upgrades</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <p>© 2025 RailYatra · Built with ❤️ for Indian Railways</p>
+</footer>
+</body>
+</html>

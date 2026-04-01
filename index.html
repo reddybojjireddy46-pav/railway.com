@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RailYatra — Book Train Tickets</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="navbar">
+    <div class="nav-brand">
+        <span class="logo-icon">🚄</span>
+        <span class="logo-text">RailYatra</span>
+    </div>
+    <div class="nav-links">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="mybookings.html" class="nav-link">My Bookings</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-bg">
+        <div class="track-line t1"></div>
+        <div class="track-line t2"></div>
+        <div class="track-line t3"></div>
+    </div>
+    <div class="hero-content">
+        <div class="hero-badge">India's Smart Rail Booking</div>
+        <h1 class="hero-title">Your Journey,<br><span class="accent">Perfectly Planned</span></h1>
+        <p class="hero-sub">Search trains, check live availability, and book tickets instantly.</p>
+    </div>
+</section>
+
+<!-- Search Card -->
+<section class="search-section">
+    <div class="search-card">
+        <div class="search-card-header">
+            <h2>Search Trains</h2>
+            <p>Find the best trains for your route</p>
+        </div>
+
+        <div id="errorMsg" class="error-banner" style="display:none;"></div>
+
+        <form action="search" method="get" class="search-form" id="searchForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="from">
+                        <span class="label-icon">🟢</span> From
+                    </label>
+                    <select name="from" id="from" class="form-select" required>
+                        <option value="">Select Origin</option>
+                        <option value="Bengaluru">Bengaluru</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                    </select>
+                </div>
+
+                <button type="button" class="swap-btn" onclick="swapStations()" title="Swap">⇄</button>
+
+                <div class="form-group">
+                    <label for="to">
+                        <span class="label-icon">🔴</span> To
+                    </label>
+                    <select name="to" id="to" class="form-select" required>
+                        <option value="">Select Destination</option>
+                        <option value="Bengaluru">Bengaluru</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="date">
+                        <span class="label-icon">📅</span> Date of Journey
+                    </label>
+                    <input type="date" name="date" id="date" class="form-input" required min="">
+                </div>
+            </div>
+
+            <button type="submit" class="search-btn">
+                <span>🔍</span> Search Trains
+            </button>
+        </form>
+    </div>
+</section>
+
+<!-- Features -->
+<section class="features-section">
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Instant Booking</h3>
+            <p>Book confirmed tickets in seconds with real-time availability</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🎫</div>
+            <h3>Live PNR Status</h3>
+            <p>Track your ticket status and waitlist position anytime</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔄</div>
+            <h3>Smart Cancellation</h3>
+            <p>Cancel tickets and waitlist auto-upgrades instantly</p>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>© 2025 RailYatra · Built with ❤️ for Indian Railways</p>
+</footer>
+
+<script>
+    // Set minimum date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('date').min = today;
+    document.getElementById('date').value = today;
+
+    // Handle URL errors
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('error') === 'same') {
+        document.getElementById('errorMsg').textContent = '⚠ Source and destination cannot be the same!';
+        document.getElementById('errorMsg').style.display = 'block';
+    } else if (params.get('error') === 'missing') {
+        document.getElementById('errorMsg').textContent = '⚠ Please fill in all fields before searching.';
+        document.getElementById('errorMsg').style.display = 'block';
+    }
+
+    function swapStations() {
+        const from = document.getElementById('from');
+        const to = document.getElementById('to');
+        const temp = from.value;
+        from.value = to.value;
+        to.value = temp;
+        // Animation
+        const btn = document.querySelector('.swap-btn');
+        btn.style.transform = 'rotate(180deg)';
+        setTimeout(() => btn.style.transform = '', 300);
+    }
+
+    document.getElementById('searchForm').addEventListener('submit', function(e) {
+        const from = document.getElementById('from').value;
+        const to = document.getElementById('to').value;
+        if (from === to && from !== '') {
+            e.preventDefault();
+            document.getElementById('errorMsg').textContent = '⚠ Source and destination cannot be the same!';
+            document.getElementById('errorMsg').style.display = 'block';
+        }
+    });
+</script>
+</body>
+</html>
